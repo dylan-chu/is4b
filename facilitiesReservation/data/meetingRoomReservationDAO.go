@@ -156,8 +156,8 @@ func (dao MeetingRoomReservationDAO) GetByReservationTime(startTimeStr string, e
     log.Fatal(err)
   }
 
-  rows, err := db.Query("SELECT meetingRoomId from MEETING_ROOM_RESERVATION where (startTime<=? and endTime>?) or (startTime<? and endTime>=?)",
-    startTime, startTime, endTime, endTime)
+  rows, err := db.Query("SELECT meetingRoomId from MEETING_ROOM_RESERVATION where (startTime>=? and startTime<?) or (endTime>? and endTime<=?)",
+    startTime, endTime, startTime, endTime)
   if err != nil {
     log.Fatal(err)
   }
